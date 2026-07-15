@@ -1,0 +1,35 @@
+[
+  {
+    "remarks": "Example node",
+    "outbounds": [
+      {
+        "protocol": "vless",
+        "tag": "proxy-example",
+        "settings": {
+          "vnext": [
+            {
+              "address": "203.0.113.10",
+              "port": 443,
+              "users": [
+                {
+                  "id": "00000000-0000-0000-0000-000000000000",
+                  "flow": "xtls-rprx-vision"
+                }
+              ]
+            }
+          ]
+        },
+        "streamSettings": {
+          "network": "tcp",
+          "security": "reality",
+          "realitySettings": {
+            "serverName": "example.com",
+            "fingerprint": "firefox",
+            "publicKey": "replace-me",
+            "shortId": "abcd"
+          }
+        }
+      }
+    ]
+  }
+]
