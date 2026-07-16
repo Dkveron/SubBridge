@@ -85,8 +85,11 @@ def _parse_vless_outbound(outbound: Any, remarks: str) -> ProxyNode | None:
     elif security == "tls":
         servername = stream.get("tlsSettings", {}).get("serverName")
 
-    tag = str(outbound.get("tag") or "")
-    name = remarks if not tag else f"{remarks} | {tag}"
+    tag = str(outbound.get("tag") or "proxy")
+    
+    # Mihomo requires every proxy name to be unique.
+    # The endpoint and UUID prefix distinguish nodes with identical provider labels.
+    name = f"{remarks} | {tag} | {server}:{port} | {str(uuid)[:8]}"
 
     return ProxyNode(
         name=name,
