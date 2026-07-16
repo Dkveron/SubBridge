@@ -69,6 +69,12 @@ def _parse_vless_outbound(outbound: Any, remarks: str) -> ProxyNode | None:
     security = stream.get("security")
     tls_enabled = security in {"tls", "reality"}
 
+    # The MVP currently generates complete settings only for TCP Reality.
+    # Skip gRPC, XHTTP and other transports until their dedicated options
+    # are supported by the Mihomo generator.
+    if network != "tcp" or security != "reality":
+        return None
+
     servername = fingerprint = public_key = short_id = None
     if security == "reality":
         reality = stream.get("realitySettings", {})
